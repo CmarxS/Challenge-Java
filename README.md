@@ -11,20 +11,20 @@ Este projeto consiste na criação de uma API REST utilizando Java com Spring Bo
 A API é responsável por gerenciar entidades relacionadas ao controle de motos em filiais, incluindo funcionalidades completas de CRUD para pelo menos duas entidades, além de implementar:
 
    - Uso do Spring Web para criação da API RESTful
-   -  Integração com banco de dados Oracle ou H2 via Spring Data JPA
-   -  Relacionamentos entre entidades conforme modelo relacional fornecido
-   -  Validação de campos utilizando Bean Validation
-   -  Implementação de paginação, ordenação e busca por parâmetros para resultados
-   -  Utilização de cache para otimizar requisições
-   -  Aplicação de boas práticas de design REST
-   -  Tratamento centralizado de erros para maior robustez da API
-   -  Uso de DTOs para transferência segura e eficiente dos dados
-     
+   - Integração com banco de dados Oracle ou H2 via Spring Data JPA
+   - Relacionamentos entre entidades conforme modelo relacional fornecido
+   - Validação de campos utilizando Bean Validation
+   - Implementação de paginação, ordenação e busca por parâmetros para resultados
+   - Utilização de cache para otimizar requisições
+   - Aplicação de boas práticas de design REST
+   - Tratamento centralizado de erros para maior robustez da API
+   - Uso de DTOs para transferência segura e eficiente dos dados
+
 Este projeto busca atender os requisitos técnicos e critérios de avaliação definidos para o sprint, entregando uma solução organizada, inovadora e aderente ao desafio proposto.
 
 ---
 
-## 🏍️ Atributos da entidades do Projeto     
+## 🏍️ Atributos das Entidades do Projeto     
 
 A entidade `Pais` possui os seguintes atributos:
 
@@ -67,13 +67,13 @@ A entidade `Usuario` possui os seguintes atributos:
 - `cod_filial` (Integer)
 - `funcao_usuario` (String)
 
-A entidade `Movimentcao-Moto` possui os seguintes atributos:
+A entidade `Movimentacao-Moto` possui os seguintes atributos:
 
 - `cod_movimento` (Integer)
 - `cod_moto` (Integer)
 - `cod_filial` (Integer)
 - `tipo_movimento` (String)
-- `data_movimento` (LocaDataTime)
+- `data_movimento` (LocalDateTime)
 - `manutencao_necessaria` (String)
 
 A entidade `Manutencao-Moto` possui os seguintes atributos:
@@ -81,7 +81,7 @@ A entidade `Manutencao-Moto` possui os seguintes atributos:
 - `cod_manutencao` (Integer)
 - `cod_moto` (Integer)
 - `tipo_manutencao` (String)
-- `data_manutencao` (LocaDataTime)
+- `data_manutencao` (LocalDateTime)
 
 A entidade `Localizacao-Moto` possui os seguintes atributos:
 
@@ -100,7 +100,7 @@ A entidade `Sensor-Moto` possui os seguintes atributos:
 - `tipo_sensor` (String)
 - `local_instalacao` (String)
 - `cod_moto` (Integer)
-  
+
 ---
 
 ## 🔗 Endpoints da API
@@ -121,10 +121,10 @@ A entidade `Sensor-Moto` possui os seguintes atributos:
 
 | Método | Endpoint        | Descrição                   |
 | ------ | --------------- | --------------------------- |
-| POST   | `/clientes`      | Criar um novo cliente        |
-| GET    | `/clientes`      | Listar todos os Clientes     |
-| PUT    | `/clientes/{id}` | Atualizar um Cliente pelo ID |
-| DELETE | `/clientes/{id}` | Deletar um Cliente pelo ID   |
+| POST   | `/clientes`     | Criar um novo cliente       |
+| GET    | `/clientes`     | Listar todos os clientes    |
+| PUT    | `/clientes/{id}`| Atualizar um cliente pelo ID|
+| DELETE | `/clientes/{id}`| Deletar um cliente pelo ID  |
 
 | Método | Endpoint        | Descrição                    |
 | ------ | --------------- | ---------------------------- |
@@ -182,224 +182,61 @@ A entidade `Sensor-Moto` possui os seguintes atributos:
 | PUT    | `/sensor-moto/{id}` | Atualizar um sensor pelo ID |
 | DELETE | `/sensor-moto/{id}` | Deletar um sensor pelo ID   |
 
-## Spring da aplicação
-![image](https://github.com/user-attachments/assets/e34b6b8a-be94-4e93-8123-597c3a3eb5bc)
+## 🚀 Como Iniciar a Aplicação
 
+### Pré-requisitos
+
+- Java JDK 11 ou superior  
+- Maven  
+- IntelliJ IDEA  
+- Postman (ou ferramenta equivalente para testes de API)  
+
+### 1. Clonar o repositório
+
+```bash
+git clone <URL_DO_REPOSITÓRIO>
+cd <NOME_DO_DIRETÓRIO>
+```
+
+### 2. Abrir no IntelliJ IDEA
+
+- Inicie o IntelliJ IDEA.  
+- Selecione **File > Open...**  
+- Navegue até a pasta do projeto e clique em **OK**.  
+- Aguarde a importação do Maven.  
+
+### 3. Configurar o banco de dados
+
+- **H2 (padrão)**: não requer configuração adicional.  
+- **Oracle**: edite o arquivo `src/main/resources/application.properties`:
+
+  ```properties
+  spring.datasource.url=jdbc:oracle:thin:@//HOST:PORT/SERVICENAME
+  spring.datasource.username=SEU_USUARIO
+  spring.datasource.password=SUA_SENHA
+  ```
+
+### 4. Executar a aplicação
+
+- No IntelliJ, abra a classe principal e clique no ícone **Run**.  
+- Ou via terminal:
+
+  ```bash
+  mvn spring-boot:run
+  ```
+
+### 5. Testar a API com o Postman
+
+- **Base URL**: `http://localhost:8080`  
+- Importe a coleção, se houver, ou crie requests manualmente:  
+  - **GET** `/paises`  
+  - **POST** `/paises`  
+
+    ```json
+    {
+      "nomePais": "Brasil"
+    }
+    ```  
+  - Outros endpoints conforme definido acima.
 
 ---
-
-## 🧪 Exemplo de JSON para POST
-
-```json
-##Cidade
-{
-		"nomeCidade": "Manaus",
-		"estado": {
-			"codEstado": 1,
-			"nomeEstado": "Amazonas",
-			"pais": {
-				"codPais": 1,
-				"nomePais": "Brasil"
-			}
-		}
-	}
-
-##Cliente
-{
-		"nomeCliente": "Lucas Silva",
-		"cpfCliente": "123.456.789-00",
-		"telefoneCliente": "(11) 91234-5678"
-	}
-
-##Estado
-{
-		"nomeEstado": "Amazonas",
-		"pais": {
-			"codPais": 1,
-			"nomePais": "Brasil"
-		}
-	}
-
-##Filial
-{
-		"nomeFilial": "Filial Campo Grande - Centro",
-		"cidade": {
-			"codCidade": 18,
-			"nomeCidade": "Campo Grande",
-			"estado": {
-				"codEstado": 18,
-				"nomeEstado": "Mato Grosso do Sul",
-				"pais": {
-					"codPais": 1,
-					"nomePais": "Brasil"
-				}
-			}
-		}
-
-##LocalizacaoMoto
-	{
-		"moto": {
-			"codMoto": 1,
-			"modelo": "Mottuuu Sport",
-			"anoFabricacao": 2061,
-			"categoria": "Esportiva",
-			"cliente": {
-				"codCliente": 1,
-				"nomeCliente": "Lucas Silva",
-				"cpfCliente": "123.456.789-00",
-				"telefoneCliente": "(11) 91234-5678"
-			}
-		},
-		"filial": {
-			"codFilial": 1,
-			"nomeFilial": "Filial São Paulo - Butantã",
-			"cidade": {
-				"codCidade": 14,
-				"nomeCidade": "São Paulo",
-				"estado": {
-					"codEstado": 14,
-					"nomeEstado": "São Paulo",
-					"pais": {
-						"codPais": 1,
-						"nomePais": "Brasil"
-					}
-				}
-			},
-			"tamanhoPatio": 500
-		},
-		"boxPosicao": "A1",
-		"status": "Em manutenção",
-		"dataEntrada": "2025-05-10T15:29:27.525093",
-		"dataSaida": null
-	}
-
-##ManutencaoMoto
-{
-		"moto": {
-			"codMoto": 1,
-			"modelo": "Mottu Sport",
-			"anoFabricacao": 2021,
-			"categoria": "Esportiva",
-			"cliente": {
-				"codCliente": 1,
-				"nomeCliente": "Lucas Silva",
-				"cpfCliente": "123.456.789-00",
-				"telefoneCliente": "(11) 91234-5678"
-			}
-		},
-		"tipoManutencao": "Troca de óleo",
-		"dataManutencao": "2025-05-10T15:29:27.700644"
-	}
-
-##Moto (Cada Cliente só pode ter uma moto, então para criar alterar o código do cliente)
-{
-		"modelo": "Mottu Sport",
-		"anoFabricacao": 2021,
-		"categoria": "Esportiva",
-		"cliente": {
-			"codCliente": 41,
-			"nomeCliente": "Lucas Silva",
-			"cpfCliente": "123.456.789-00",
-			"telefoneCliente": "(11) 91234-5678"
-		}
-	}
-
-##MovimentoMoto
-{
-		"moto": {
-			"codMoto": 1,
-			"modelo": "Mottu Sport",
-			"anoFabricacao": 2021,
-			"categoria": "Esportiva",
-			"cliente": {
-				"codCliente": 1,
-				"nomeCliente": "Lucas Silva",
-				"cpfCliente": "123.456.789-00",
-				"telefoneCliente": "(11) 91234-5678"
-			}
-		},
-		"filial": {
-			"codFilial": 1,
-			"nomeFilial": "Filial São Paulo - Butantã",
-			"cidade": {
-				"codCidade": 14,
-				"nomeCidade": "São Paulo",
-				"estado": {
-					"codEstado": 14,
-					"nomeEstado": "São Paulo",
-					"pais": {
-						"codPais": 1,
-						"nomePais": "Brasil"
-					}
-				}
-			},
-			"tamanhoPatio": 500
-		},
-		"tipoMovimento": "Entrada",
-		"dataMovimento": "2025-05-10T15:29:27.598908",
-		"manutencaoNecessaria": null
-	}
-##Pais
-{
-		"nomePais": "Brasil"
-	}
-##SensorMoto
-{
-		"filial": {
-			"codFilial": 1,
-			"nomeFilial": "Filial São Paulo - Butantã",
-			"cidade": {
-				"codCidade": 14,
-				"nomeCidade": "São Paulo",
-				"estado": {
-					"codEstado": 14,
-					"nomeEstado": "São Paulo",
-					"pais": {
-						"codPais": 1,
-						"nomePais": "Brasil"
-					}
-				}
-			},
-			"tamanhoPatio": 500
-		},
-		"tipoSensor": "Câmera",
-		"localInstalacao": "Entrada Lateral",
-		"moto": {
-			"codMoto": 1,
-			"modelo": "Mottu Sport",
-			"anoFabricacao": 2021,
-			"categoria": "Esportiva",
-			"cliente": {
-				"codCliente": 1,
-				"nomeCliente": "Lucas Silva",
-				"cpfCliente": "123.456.789-00",
-				"telefoneCliente": "(11) 91234-5678"
-			}
-		}
-	}
-
-##Usuario
-{
-		"nomeUsuario": "André André",
-		"email": "andre.silva@mottu.com",
-		"tipoAcesso": "Admin",
-		"filial": {
-			"codFilial": 1,
-			"nomeFilial": "Filial São Paulo - Butantã",
-			"cidade": {
-				"codCidade": 14,
-				"nomeCidade": "São Paulo",
-				"estado": {
-					"codEstado": 14,
-					"nomeEstado": "São Paulo",
-					"pais": {
-						"codPais": 1,
-						"nomePais": "Brasil"
-					}
-				}
-			},
-			"tamanhoPatio": 500
-		},
-		"funcaoUsuario": "Gestor"
-	}
-
